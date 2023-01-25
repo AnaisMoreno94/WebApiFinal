@@ -30,26 +30,26 @@ namespace SWProvincias_MorenoAnais.Controllers
 
 
         [HttpPost]
-        public ActionResult Post(Ciudad ciudades)
+        public ActionResult Post(Ciudad ciudad)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            context.Ciudades.Add(ciudades);
+            context.Ciudades.Add(ciudad);
             context.SaveChanges();
             return Ok();
         }
 
 
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] Ciudad ciudades)
+        public ActionResult Put(int id, [FromBody] Ciudad ciudad)
         {
-            if (id != ciudades.Id)
+            if (id != ciudad.Id)
             {
                 return BadRequest();
             }
-            context.Entry(ciudades).State = EntityState.Modified;
+            context.Entry(ciudad).State = EntityState.Modified;
             context.SaveChanges();
 
             return Ok();
@@ -58,18 +58,18 @@ namespace SWProvincias_MorenoAnais.Controllers
         [HttpDelete("{id}")]
         public ActionResult<Ciudad> Delete(int id)
         {
-            var ciudades = (from c in context.Ciudades
+            var ciudad = (from c in context.Ciudades
                              where c.Id == id
                              select c).SingleOrDefault();
 
-            if (ciudades == null)
+            if (ciudad == null)
             {
                 return NotFound();
             }
-            context.Ciudades.Remove(ciudades);
+            context.Ciudades.Remove(ciudad);
             context.SaveChanges();
 
-            return ciudades;
+            return ciudad;
         }
 
 
